@@ -12,6 +12,18 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 config = json.load(open('config.json',))
 
+async def print_help(message):
+    keywords = ", ".join(config['wiki_introduction_links'])
+    print(keywords)
+    await message.reply(
+        "Hi, I'm the IOTA-Wiki bot.\n" +
+        "I was mainly created to remind you to use the god damn wiki. Just use the wiki and I'm your friend, ok?\n" +
+        "But i can also give you a link to the introduction page of a certain documantation\n" +
+        "Just mention me in your message and use one of the following keywords:\n" +
+        keywords + "\n\n" +
+        "Insider: You can also use the related emojis ;)"
+    )
+
 client = discord.Client()
 
 @client.event
@@ -30,6 +42,7 @@ async def on_message(message):
             return
 
     if client.user.mentioned_in(message):
+        needed_help = False
         for key, value in config['wiki_introduction_links'].items():
             if key.lower() in message.content.lower():
                 print('Wiki link requested')
@@ -38,5 +51,9 @@ async def on_message(message):
                     "It seems like you are searching for IOTA " + key + " documentation.\n" +
                     "Here you go: " + value + ".\n" +
                     "Happy BUIDLING!")
+                needed_help = True
+
+        if (not needed_help) and ("Hi" in message.content):
+            await print_help(message)
 
 client.run(TOKEN)
