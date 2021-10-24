@@ -35,7 +35,7 @@ async def on_message(message):
                 print('Wiki link requested')
                 await message.add_reaction(config["help_reaction"])
                 await message.reply("Hi!\n" + 
-                    "Hmmm... It seems like you are searching for IOTA " + key + " documentation.\n" +
+                    "It seems like you are searching for IOTA " + key + " documentation.\n" +
                     "Here you go: " + value + ".\n" +
                     "Happy BUIDLING!")
 
