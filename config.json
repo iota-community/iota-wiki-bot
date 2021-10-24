@@ -1,0 +1,30 @@
+{
+    "replacment_reaction": "😠",
+    "help_reaction": "❤️",
+    "wiki_links_map": {
+        "chrysalis.docs.iota.org/": "wiki.iota.org/chrysalis-docs",
+        "bee.docs.iota.org/docs": "wiki.iota.org/bee",
+        "hornet.docs.iota.org/docs": "wiki.iota.org/hornet",
+        "client-lib.docs.iota.org/docs": "wiki.iota.org/iota.rs",
+        "wallet-lib.docs.iota.org/docs": "wiki.iota.org/wallet.rs",
+        "stronghold.docs.iota.org/docs": "wiki.iota.org/stronghold.rs",
+        "identity.docs.iota.org/docs": "wiki.iota.org/identity.rs",
+        "streams.docs.iota.org/docs": "wiki.iota.org/streams",
+        "iscp.docs.iota.org/docs": "wiki.iota.org/wasp",
+        "v2.docs.iota.org/docs": "wiki.iota.org/IOTA-2.0-Research-Specifications",
+        "goshimmer.docs.iota.org/docs": "wiki.iota.org/goshimmer"
+    },
+    "wiki_introduction_links": {
+        "Chrysalis": "https://wiki.iota.org/chrysalis-docs/welcome",
+        "Bee": "https://wiki.iota.org/bee/getting_started/getting_started",
+        "Hornet": "https://wiki.iota.org/hornet/welcome",
+        "Client-lib": "https://wiki.iota.org/iota.rs/welcome",
+        "Wallet-lib": "https://wiki.iota.org/wallet.rs/welcome",
+        "Stronghold": "https://wiki.iota.org/stronghold.rs/welcome",
+        "Identity": "https://wiki.iota.org/identity.rs/introduction",
+        "Streams": "https://wiki.iota.org/streams/welcome",
+        "Iscp": "https://wiki.iota.org/wasp/overview",
+        "v2": "https://wiki.iota.org/IOTA-2.0-Research-Specifications/Preface",
+        "GoShimmer": "https://wiki.iota.org/goshimmer/welcome"
+    }
+}
