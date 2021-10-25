@@ -44,7 +44,7 @@ async def on_ready():
 async def on_message(message):
     print(f'{message.content} got written on server')
     for key, value in config['wiki_links_map'].items():
-        if key in message.content:
+        if key.lower() in message.content.lower():
             print('Wrong Wiki link used')
             text_after = re.sub(re.escape(key), value, message.content)
             await message.add_reaction(config["replacment_reaction"])
