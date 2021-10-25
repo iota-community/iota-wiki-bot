@@ -18,7 +18,7 @@ async def print_help(message):
     await message.reply(
         "Hi, I'm the IOTA-Wiki bot.\n" +
         "I was mainly created to remind you to use the god damn wiki. Just use the wiki and I'm your friend, ok?\n" +
-        "But i can also give you a link to the introduction page of a certain documantation\n" +
+        "But i can also give you a link to the introduction page of a certain documentation\n" +
         "Just mention me in your message and use one of the following keywords:\n" +
         keywords + "\n\n" +
         "Insider: You can also use the related emojis ;)"
