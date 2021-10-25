@@ -24,6 +24,16 @@ async def print_help(message):
         "Insider: You can also use the related emojis ;)"
     )
 
+
+async def print_not_found_message(message):
+    argsList = message.content.split(' ')[1::]
+    arg = ' '.join(argsList)
+    print(arg)
+    await message.reply(
+        f"Unable to find documentation for `{arg}`\n" 
+    )
+
+
 client = discord.Client()
 
 @client.event
@@ -53,7 +63,10 @@ async def on_message(message):
                     "Happy BUIDLING!")
                 needed_help = True
 
-        if (not needed_help) and ("Hi" in message.content):
+
+        if ((not needed_help) and ("Hi" in message.content)) or ((not needed_help) and ("help" in message.content.lower())):
             await print_help(message)
+        else: 
+            await print_not_found_message(message)
 
 client.run(TOKEN)
