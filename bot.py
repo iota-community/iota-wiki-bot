@@ -64,7 +64,7 @@ async def on_message(message):
                 needed_help = True
 
 
-        if ((not needed_help) and ("Hi" in message.content)) or ((not needed_help) and ("help" in message.content.lower())):
+        if not needed_help and (("hi" in message.content.lower()) or ("help" in message.content.lower())):
             await print_help(message)
         else: 
             await print_not_found_message(message)
