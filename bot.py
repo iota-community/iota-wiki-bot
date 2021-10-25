@@ -24,6 +24,16 @@ async def print_help(message):
         "Insider: You can also use the related emojis ;)"
     )
 
+
+async def print_not_found_message(message):
+    argsList = message.content.split(' ')[1::]
+    arg = ' '.join(argsList)
+    print(arg)
+    await message.reply(
+        f"Unable to find documentation for `{arg}`\n" 
+    )
+
+
 client = discord.Client()
 
 @client.event
@@ -34,7 +44,7 @@ async def on_ready():
 async def on_message(message):
     print(f'{message.content} got written on server')
     for key, value in config['wiki_links_map'].items():
-        if key in message.content:
+        if key.lower() in message.content.lower():
             print('Wrong Wiki link used')
             text_after = re.sub(re.escape(key), value, message.content)
             await message.add_reaction(config["replacment_reaction"])
@@ -53,7 +63,11 @@ async def on_message(message):
                     "Happy BUIDLING!")
                 needed_help = True
 
-        if (not needed_help) and ("Hi" in message.content):
+        if (len(message.content.split(' ')) <= 1): 
             await print_help(message)
+        elif (not needed_help) and ("hi" in message.content.lower() or "help" in message.content.lower()):
+            await print_help(message)
+        elif (not needed_help): 
+            await print_not_found_message(message)
 
 client.run(TOKEN)
