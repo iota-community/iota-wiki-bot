@@ -63,10 +63,11 @@ async def on_message(message):
                     "Happy BUIDLING!")
                 needed_help = True
 
-
-        if ((not needed_help) and ("Hi" in message.content)) or ((not needed_help) and ("help" in message.content.lower())):
+        if (len(message.content.split(' ')) <= 1): 
             await print_help(message)
-        else: 
+        elif (not needed_help) and ("hi" in message.content.lower() or "help" in message.content.lower()):
+            await print_help(message)
+        elif (not needed_help): 
             await print_not_found_message(message)
 
 client.run(TOKEN)
