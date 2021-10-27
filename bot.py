@@ -52,7 +52,7 @@ async def on_message(message):
             return
 
     if client.user.mentioned_in(message):
-        needed_help = False
+        introduction_found = False
         for key, value in config['wiki_introduction_links'].items():
             if key.lower() in message.content.lower():
                 print('Wiki link requested')
@@ -61,13 +61,13 @@ async def on_message(message):
                     "It seems like you are searching for IOTA " + key + " documentation.\n" +
                     "Here you go: " + value + ".\n" +
                     "Happy BUIDLING!")
-                needed_help = True
+                introduction_found = True
+        if introduction_found:
+            return
 
-        if (len(message.content.split(' ')) <= 1): 
+        if (len(message.content.split(' ')) <= 1) or ("hi" or "help" in message.content.lower()):
             await print_help(message)
-        elif (not needed_help) and ("hi" in message.content.lower() or "help" in message.content.lower()):
-            await print_help(message)
-        elif (not needed_help): 
+        else: 
             await print_not_found_message(message)
 
 client.run(TOKEN)
