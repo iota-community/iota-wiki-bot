@@ -54,9 +54,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    message_lower = message.content.lower()
     print(f'{message.content} got written on server')
     for key, value in config['wiki_links_map'].items():
-        if key.lower() in message.content.lower():
+        if key.lower() in message_lower:
             print('Wrong Wiki link used')
             text_after = re.sub(re.escape(key), value, message.content)
             await message.add_reaction(config["replacment_reaction"])
@@ -64,7 +65,7 @@ async def on_message(message):
             return
 
     if client.user.mentioned_in(message):
-        query = re.search("(?<=search for ).*", message.content.lower()) or re.search("(?<=search ).*", message.content.lower())
+        query = re.search("(?<=search for ).*", message_lower) or re.search("(?<=search ).*", message_lower)
         if query:
             print('Wiki search requested')
             await print_query_result(message, query[0])
@@ -72,7 +73,7 @@ async def on_message(message):
 
         introduction_found = False
         for key, value in config['wiki_introduction_links'].items():
-            if key.lower() in message.content.lower():
+            if key.lower() in message_lower:
                 print('Wiki link requested')
                 await message.add_reaction(config["help_reaction"])
                 await message.reply("Hi!\n" + 
@@ -83,7 +84,7 @@ async def on_message(message):
         if introduction_found:
             return
 
-        if (len(message.content.split(' ')) <= 1) or ("hi" or "help" in message.content.lower()):
+        if (len(message.content.split(' ')) <= 1) or ("hi" or "help" in message_lower):
             await print_help(message)
         else: 
             await print_not_found_message(message)
