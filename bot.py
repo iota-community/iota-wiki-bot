@@ -1,11 +1,11 @@
+import discord
+import json
 import os
 import re
-import json
-
-import discord
 
 from discord import message
 from dotenv import load_dotenv
+from urllib.parse import quote
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -17,11 +17,16 @@ async def print_help(message):
     print(keywords)
     await message.reply(
         "Hi, I'm the IOTA-Wiki bot.\n" +
-        "I was mainly created to gently remind you to use the IOTA wiki <https://wiki.iota.org>.\n" +
-        "I will suggest links to the introduction page of certain documentation\n" +
-        "Just mention me in your message and use one of the following keywords:\n" +
-        keywords + "\n\n" +
-        "Insider: You can also use the related emojis ;)"
+        "I was mainly created to gently remind you to use the IOTA Wiki <https://wiki.iota.org>.\n" +
+        "I can help you with the following:\n" +
+        "**Introduction Links:** I will suggest links to the introduction page of a certain documentation.\n" +
+        "Just mention me in your message and use one of the following keywords:\n`" +
+        keywords + "`\n\n" +
+        "Insider: You can also use the related emojis ;)\n" + 
+        "\n" +
+        "**Wiki Search:** Let me search the wiki for you.\n" +
+        "Just mention me with the keywords `search` or `search for`\n" +
+        "and I will provide you with a link to the search results."
     )
 
 
@@ -33,6 +38,13 @@ async def print_not_found_message(message):
         f"Unable to find documentation for `{arg}`\n" 
     )
 
+async def  print_query_result(message, query):
+    await message.reply(
+        "Hi,\n" +
+        "It seems you are searching for `" + query + "`.\n" +
+        "Let me help you out my friend. Here your result:\n" +
+        "<https://wiki.iota.org/search?q=" + quote(query) + ">\n"
+    )
 
 client = discord.Client()
 
@@ -52,6 +64,12 @@ async def on_message(message):
             return
 
     if client.user.mentioned_in(message):
+        query = re.search("(?<=search for ).*", message.content.lower()) or re.search("(?<=search ).*", message.content.lower())
+        if query:
+            print('Wiki search requested')
+            await print_query_result(message, query[0])
+            return
+
         introduction_found = False
         for key, value in config['wiki_introduction_links'].items():
             if key.lower() in message.content.lower():
