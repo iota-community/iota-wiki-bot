@@ -3,8 +3,8 @@
     "help_reaction": "❤️",
     "wiki_links_map": {
         "chrysalis.docs.iota.org/": "wiki.iota.org/chrysalis-docs",
-        "bee.docs.iota.org/docs": "wiki.iota.org/bee",
-        "hornet.docs.iota.org/docs": "wiki.iota.org/hornet",
+        "bee.docs.iota.org/": "wiki.iota.org/bee",
+        "hornet.docs.iota.org/": "wiki.iota.org/hornet",
         "client-lib.docs.iota.org/docs": "wiki.iota.org/iota.rs",
         "wallet-lib.docs.iota.org/docs": "wiki.iota.org/wallet.rs",
         "stronghold.docs.iota.org/docs": "wiki.iota.org/stronghold.rs",
