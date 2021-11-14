@@ -61,7 +61,9 @@ async def on_message(message):
             print('Wrong Wiki link used')
             text_after = re.sub(re.escape(key), value, message.content)
             await message.add_reaction(config["replacment_reaction"])
-            await message.reply("Hi, it seems like you didn't use the wiki. Did you mean: " + text_after + " ?")
+            embed = discord.Embed(description=text_after)
+            embed.set_author(name=message.author.display_name, icon_url=message.author.avatar_url)
+            await message.reply("Hi, it seems like you didn't use the wiki. Did you mean:\n", embed=embed)
             return
 
     if client.user.mentioned_in(message):
